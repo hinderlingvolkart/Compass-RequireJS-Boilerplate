@@ -11,177 +11,177 @@ $legacy-support-for-ie6: false;
 
 /* font functions */
 @function px2em($px, $contextPXSize : $base-font-size ){
-  @return ( $px / $contextPXSize ) * 1em;
+	@return ( $px / $contextPXSize ) * 1em;
 }
 
 @function lineheight( $fontSizePx,$lineHeightPx ) {
-  @return ( $lineHeightPx / $fontSizePx );
+	@return ( $lineHeightPx / $fontSizePx );
 }
 
 @mixin antialiasing( $type:antialiased ) {
-  /* antialiased, none, subpixel-antialiased*/
-  -webkit-font-smoothing: $type;
-  font-smoothing: $type;
-  font-smooth: always;
+	/* antialiased, none, subpixel-antialiased*/
+	-webkit-font-smoothing: $type;
+	font-smoothing: $type;
+	font-smooth: always;
 }
 
 
 /* css3/IE-Filters mixins */
 
 @mixin gradient ($start-pos, $end-pos, $start-color, $end-color, $ie: $legacy-support-for-ie) {
-    $deg-end-pos: null;
-    
-    @if $end-pos == right bottom {
-        $deg-end-pos: 315deg;
-    } @else if $end-pos == left bottom {
-        $deg-end-pos: 225deg;
-    } @else if $end-pos == left top {
-        $deg-end-pos: 135deg;
-    } @else if $end-pos == right top  {
-        $deg-end-pos: 45deg;
-    }
-    
-    background-color: $start-color;
-    background-image: -webkit-gradient(linear, $start-pos, $end-pos, from($start-color), to($end-color)); /* Saf4+, Chrome */
-    
-    @if $deg-end-pos == null {
-        background-image: -o-linear-gradient($start-pos, $start-color, $end-color); /* Opera 11.10+ */
-        background-image: -ms-linear-gradient($start-pos, $start-color, $end-color); /* IE10 */
-        background-image: -moz-linear-gradient($start-pos, $start-color, $end-color); /* FF3.6 */
-        background-image: -webkit-linear-gradient($start-pos, $start-color, $end-color); /* Chrome 10+, Saf5.1+ */
-    } @else {
-        background-image: -o-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* Opera 11.10+ */
-        background-image: -ms-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* IE10 */
-        background-image: -moz-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* FF3.6 */
-        background-image: -webkit-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* Chrome 10+, Saf5.1+ */
-    }
-    background-image: linear-gradient($start-pos, $start-color, $end-color);
-    @if $ie == true {
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$start-color}', EndColorStr='#{$end-color}'); /* IE6–IE9 */
-    }
+		$deg-end-pos: null;
+		
+		@if $end-pos == right bottom {
+				$deg-end-pos: 315deg;
+		} @else if $end-pos == left bottom {
+				$deg-end-pos: 225deg;
+		} @else if $end-pos == left top {
+				$deg-end-pos: 135deg;
+		} @else if $end-pos == right top  {
+				$deg-end-pos: 45deg;
+		}
+		
+		background-color: $start-color;
+		background-image: -webkit-gradient(linear, $start-pos, $end-pos, from($start-color), to($end-color)); /* Saf4+, Chrome */
+		
+		@if $deg-end-pos == null {
+				background-image: -o-linear-gradient($start-pos, $start-color, $end-color); /* Opera 11.10+ */
+				background-image: -ms-linear-gradient($start-pos, $start-color, $end-color); /* IE10 */
+				background-image: -moz-linear-gradient($start-pos, $start-color, $end-color); /* FF3.6 */
+				background-image: -webkit-linear-gradient($start-pos, $start-color, $end-color); /* Chrome 10+, Saf5.1+ */
+		} @else {
+				background-image: -o-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* Opera 11.10+ */
+				background-image: -ms-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* IE10 */
+				background-image: -moz-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* FF3.6 */
+				background-image: -webkit-linear-gradient($start-pos $deg-end-pos, $start-color, $end-color); /* Chrome 10+, Saf5.1+ */
+		}
+		background-image: linear-gradient($start-pos, $start-color, $end-color);
+		@if $ie == true {
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$start-color}', EndColorStr='#{$end-color}'); /* IE6–IE9 */
+		}
 }
 
 
 @mixin linear-gradient($from, $to, $ie: $legacy-support-for-ie) {
-  @if $ie != true { background-color: $to; }
-  
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
-  background-image: -webkit-linear-gradient(top, $from, $to);
-  background-image: -moz-linear-gradient(top, $from, $to);
-  background-image: -ms-linear-gradient(top, $from, $to);
-  background-image: -o-linear-gradient(top, $from, $to);
-  background-image: linear-gradient(top, bottom, $from, $to);
+	@if $ie != true { background-color: $to; }
+	
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -ms-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(top, bottom, $from, $to);
 
-  @if $ie == true { 
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
-    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
-  }
+	@if $ie == true { 
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+		-ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+	}
 }
 
 @mixin rotate( $degrees, $ie: $legacy-support-for-ie ) {
-  -webkit-transform: rotate( $degrees );
-  -moz-transform: rotate( $degrees );
-  -ms-transform: rotate( $degrees );
-  -o-transform: rotate( $degrees );
-  transform: rotate( $degrees );
+	-webkit-transform: rotate( $degrees );
+	-moz-transform: rotate( $degrees );
+	-ms-transform: rotate( $degrees );
+	-o-transform: rotate( $degrees );
+	transform: rotate( $degrees );
 
-  @if $ie == true { 
-    filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
-    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
-    zoom: 1;
-  }
+	@if $ie == true { 
+		filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+		-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+		zoom: 1;
+	}
 }
 
 @mixin borderbox( $type : "border-box" ){
-  @include box-sizing( $type );
+	@include box-sizing( $type );
 }
 
 @mixin background-size( $param: auto ) {
-  -webkit-background-size: $param;
-     -moz-background-size: $param;
-       -o-background-size: $param;
-          background-size: $param;
+	-webkit-background-size: $param;
+		 -moz-background-size: $param;
+			 -o-background-size: $param;
+					background-size: $param;
 }
 
 @mixin opacity ($opacity, $ie: $legacy-support-for-ie) {
-  @if $ie == true {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
-  }
-    filter: alpha(opacity=$opacity*100);
-    -moz-opacity:$opacity;
-    -khtml-opacity: $opacity;
-    -webkit-opacity: $opacity;
-    opacity: $opacity;
+	@if $ie == true {
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
+	}
+		filter: alpha(opacity=$opacity*100);
+		-moz-opacity:$opacity;
+		-khtml-opacity: $opacity;
+		-webkit-opacity: $opacity;
+		opacity: $opacity;
 }
 
 @mixin box-shadow ($x, $y, $offset, $hex, $ie: $legacy-support-for-ie) {
-     -moz-box-shadow: $x $y $offset $hex;
-  -webkit-box-shadow: $x $y $offset $hex;
-          box-shadow: $x $y $offset $hex;
-  
-  @if $ie == true {
-    $iecolor: '#' + red($hex) + green($hex) + blue($hex);
-    filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}');
-    -ms-filter: quote(progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}'));
-  }
+		 -moz-box-shadow: $x $y $offset $hex;
+	-webkit-box-shadow: $x $y $offset $hex;
+					box-shadow: $x $y $offset $hex;
+	
+	@if $ie == true {
+		$iecolor: '#' + red($hex) + green($hex) + blue($hex);
+		filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}');
+		-ms-filter: quote(progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}'));
+	}
 }
 
 @mixin border-image ($path, $offsets, $repeats) {
-     -moz-border-image: $path $offsets $repeats;
-       -o-border-image: $path $offsets $repeats;
-  -webkit-border-image: $path $offsets $repeats;
-          border-image: $path $offsets $repeats;
+		 -moz-border-image: $path $offsets $repeats;
+			 -o-border-image: $path $offsets $repeats;
+	-webkit-border-image: $path $offsets $repeats;
+					border-image: $path $offsets $repeats;
 }
 
 
 @mixin linear-gradient($from, $to, $ie: $legacy-support-for-ie) {
-  @if $ie != true { background-color: $to; }
-  
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
-  background-image: -webkit-linear-gradient(top, $from, $to);
-  background-image: -moz-linear-gradient(top, $from, $to);
-  background-image: -ms-linear-gradient(top, $from, $to);
-  background-image: -o-linear-gradient(top, $from, $to);
-  background-image: linear-gradient(top, bottom, $from, $to);
+	@if $ie != true { background-color: $to; }
+	
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -ms-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(top, bottom, $from, $to);
 
-  @if $ie == true { 
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
-    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
-  }
+	@if $ie == true { 
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+		-ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+	}
 }
 
 @mixin perspective($perspective) {
-     -moz-perspective: $perspective;
-      -ms-perspective: $perspective;
-  -webkit-perspective: $perspective;
-          perspective: $perspective;
-     -moz-transform-style: preserve-3d;
-      -ms-transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+		 -moz-perspective: $perspective;
+			-ms-perspective: $perspective;
+	-webkit-perspective: $perspective;
+					perspective: $perspective;
+		 -moz-transform-style: preserve-3d;
+			-ms-transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+					transform-style: preserve-3d;
 }
 
 @mixin transform ($transforms) {
-     -moz-transform: $transforms;
-       -o-transform: $transforms;
-      -ms-transform: $transforms;
-  -webkit-transform: $transforms;
-          transform: $transforms;
+		 -moz-transform: $transforms;
+			 -o-transform: $transforms;
+			-ms-transform: $transforms;
+	-webkit-transform: $transforms;
+					transform: $transforms;
 }
 
 @mixin translate ($x, $y) {
-  @include transform(translate($x, $y));
+	@include transform(translate($x, $y));
 }
 
 @mixin scale ($size) {
-  @include transform(scale(#{$size}));
+	@include transform(scale(#{$size}));
 }
 
 @mixin matrix ($a, $b, $c, $d, $e, $f) {
-         -moz-transform: matrix($a, $b, $c, $d, #{$e}px, #{$f}px);
-           -o-transform: matrix($a, $b, $c, $d, $e, $f);
-          -ms-transform: matrix($a, $b, $c, $d, $e, $f);
-      -webkit-transform: matrix($a, $b, $c, $d, $e, $f);
-              transform: matrix($a, $b, $c, $d, $e, $f);
+				 -moz-transform: matrix($a, $b, $c, $d, #{$e}px, #{$f}px);
+					 -o-transform: matrix($a, $b, $c, $d, $e, $f);
+					-ms-transform: matrix($a, $b, $c, $d, $e, $f);
+			-webkit-transform: matrix($a, $b, $c, $d, $e, $f);
+							transform: matrix($a, $b, $c, $d, $e, $f);
 }
 

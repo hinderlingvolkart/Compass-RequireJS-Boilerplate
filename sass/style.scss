@@ -17,36 +17,36 @@
  
 
 /* ==|== primary styles =====================================================
-   Author: Hinderling & Volkart Frontend 
-   ========================================================================== */
+	 Author: Hinderling & Volkart Frontend 
+	 ========================================================================== */
 
 
 #main {
-  margin: px2em( 10px );
-  padding: 10px;
-  font: {
-    family: serif;
-    weight: bold;
-    size: 1.2em;
-  }
-  .blbalbla {
-    margin: px2em( 100px );
-  }
+	margin: px2em( 10px );
+	padding: 10px;
+	font: {
+		family: serif;
+		weight: bold;
+		size: 1.2em;
+	}
+	.blbalbla {
+		margin: px2em( 100px );
+	}
 }
 
 #main {
-  @include borderbox;
+	@include borderbox;
 }
 
 
 /* ==|== media queries ======================================================
-   EXAMPLE Media Query for Responsive Design.
-   This example overrides the primary ('mobile first') styles
-   Modify as content requires.
-   ========================================================================== */
+	 EXAMPLE Media Query for Responsive Design.
+	 This example overrides the primary ('mobile first') styles
+	 Modify as content requires.
+	 ========================================================================== */
 
 //@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+	/* Style adjustments for viewports that meet the condition */
 //}
 
 
