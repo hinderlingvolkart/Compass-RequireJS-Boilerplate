@@ -1,0 +1,56 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ *
+ * Detailed information about this CSS: h5bp.com/css
+ *
+ * ==|== normalize ==========================================================
+ */
+
+@import "constants.scss";
+@import "globalMixins.scss";
+
+@import "normalize.scss";
+ 
+
+/* ==|== primary styles =====================================================
+   Author: Hinderling & Volkart Frontend 
+   ========================================================================== */
+
+
+#main {
+  margin: px2em( 10px );
+  padding: 10px;
+  font: {
+    family: serif;
+    weight: bold;
+    size: 1.2em;
+  }
+  .blbalbla {
+    margin: px2em( 100px );
+  }
+}
+
+#main {
+  @include borderbox;
+}
+
+
+/* ==|== media queries ======================================================
+   EXAMPLE Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+//@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+//}
+
+
+@import "helpers.scss";
+@import "print.scss";
+
+
