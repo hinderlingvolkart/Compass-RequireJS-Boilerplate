@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project name="requirejs" basedir="./" default="compile">
+
+	<target name="compile">
+		<copy todir="js-temp">
+			<fileset dir="js"/>
+		</copy>
+		<exec executable="find">
+			<arg line="js-temp"/>
+			<arg line="-type d"/>
+			<arg line="-name .svn"/>
+			<arg line="-exec rm"/>
+			<arg line="-rf {} ;"/>
+		</exec>
+		<exec executable="node" dir="${basedir}">
+			<arg line="'build/r.js'" />
+			<arg line="-o build/app.build.js" />
+		</exec>
+		<delete dir="js-temp"/>
+	</target>
+	
+</project>
