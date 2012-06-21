@@ -25,6 +25,18 @@ $legacy-support-for-ie6: false;
 	font-smooth: always;
 }
 
+@mixin inlinebox( $align:top,$ie: $legacy-support-for-ie ) {
+	display: -moz-inline-stack;
+	display: inline-block;
+
+	@if $ie == true {
+		*display: inline;
+		*zoom: 1;
+	}
+
+	vertical-align: $align;
+}
+
 
 /* css3/IE-Filters mixins */
 
@@ -183,5 +195,24 @@ $legacy-support-for-ie6: false;
 					-ms-transform: matrix($a, $b, $c, $d, $e, $f);
 			-webkit-transform: matrix($a, $b, $c, $d, $e, $f);
 							transform: matrix($a, $b, $c, $d, $e, $f);
+}
+
+
+@mixin fontFace( $fontName, $path: "", $weight: normal, $style: none, $fileName: $fontName, $svg:0 ) {
+	@font-face {
+	  font-family: $fontName;
+	  				src: url("#{$path}#{$fileName}.eot");
+				  	src: url("#{$path}#{$fileName}.eot?iefix") format("eot"), 
+				  			 url("#{$path}#{$fileName}.woff") format("woff"),
+				  			 url("#{$path}#{$fileName}.ttf") format("truetype");
+	  			 /*
+	  			 @if $svg != 0 {
+	  			 	,url("#{$path}#{$fileName}.svg##{$fileName}") format("svg");
+	  			 }else{
+	  			 	;
+	  			 }*/
+	  font-weight: $weight;
+	  font-style: $style;
+	}
 }
 
