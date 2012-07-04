@@ -5,11 +5,12 @@
 @import "compass/layout";
 @import "compass/css3";
 
+
 /* make sure $useIEFilters is set*/
 
 $legacy-support-for-ie6: false;
 
-/* font functions */
+/* slize functions */
 @function px2em($px, $contextPXSize : $base-font-size ){
 	@return ( $px / $contextPXSize ) * 1em;
 }
@@ -18,6 +19,11 @@ $legacy-support-for-ie6: false;
 	@return ( $lineHeightPx / $fontSizePx );
 }
 
+@function px2percent ($px,$contextSize) {
+	@return ( $px * 100 / $contextSize) * 1%;
+}
+
+
 @mixin antialiasing( $type:antialiased ) {
 	/* antialiased, none, subpixel-antialiased*/
 	-webkit-font-smoothing: $type;
@@ -25,7 +31,7 @@ $legacy-support-for-ie6: false;
 	font-smooth: always;
 }
 
-@mixin inlinebox( $align:top,$ie: $legacy-support-for-ie ) {
+@mixin inlinebox( $align:top, $ie: $legacy-support-for-ie ) {
 	display: -moz-inline-stack;
 	display: inline-block;
 
@@ -37,6 +43,11 @@ $legacy-support-for-ie6: false;
 	vertical-align: $align;
 }
 
+
+@mixin notlist {
+	padding: 0; margin: 0;
+	list-style: none;
+}
 
 /* css3/IE-Filters mixins */
 
@@ -110,26 +121,26 @@ $legacy-support-for-ie6: false;
 
 @mixin background-size( $param: auto ) {
 	-webkit-background-size: $param;
-		 -moz-background-size: $param;
-			 -o-background-size: $param;
-					background-size: $param;
+	-moz-background-size: $param;
+	-o-background-size: $param;
+	background-size: $param;
 }
 
 @mixin opacity ($opacity, $ie: $legacy-support-for-ie) {
 	@if $ie == true {
 		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity*100})";
 	}
-		filter: alpha(opacity=$opacity*100);
-		-moz-opacity:$opacity;
-		-khtml-opacity: $opacity;
-		-webkit-opacity: $opacity;
-		opacity: $opacity;
+	filter: alpha(opacity=$opacity*100);
+	-moz-opacity:$opacity;
+	-khtml-opacity: $opacity;
+	-webkit-opacity: $opacity;
+	opacity: $opacity;
 }
 
 @mixin box-shadow ($x, $y, $offset, $hex, $ie: $legacy-support-for-ie) {
-		 -moz-box-shadow: $x $y $offset $hex;
+	-moz-box-shadow: $x $y $offset $hex;
 	-webkit-box-shadow: $x $y $offset $hex;
-					box-shadow: $x $y $offset $hex;
+	box-shadow: $x $y $offset $hex;
 	
 	@if $ie == true {
 		$iecolor: '#' + red($hex) + green($hex) + blue($hex);
@@ -139,10 +150,10 @@ $legacy-support-for-ie6: false;
 }
 
 @mixin border-image ($path, $offsets, $repeats) {
-		 -moz-border-image: $path $offsets $repeats;
-			 -o-border-image: $path $offsets $repeats;
+	-moz-border-image: $path $offsets $repeats;
+	-o-border-image: $path $offsets $repeats;
 	-webkit-border-image: $path $offsets $repeats;
-					border-image: $path $offsets $repeats;
+	border-image: $path $offsets $repeats;
 }
 
 
@@ -163,22 +174,23 @@ $legacy-support-for-ie6: false;
 }
 
 @mixin perspective($perspective) {
-		 -moz-perspective: $perspective;
-			-ms-perspective: $perspective;
+	-moz-perspective: $perspective;
+	-ms-perspective: $perspective;
 	-webkit-perspective: $perspective;
-					perspective: $perspective;
-		 -moz-transform-style: preserve-3d;
-			-ms-transform-style: preserve-3d;
+	perspective: $perspective;
+	
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
-					transform-style: preserve-3d;
+	transform-style: preserve-3d;
 }
 
 @mixin transform ($transforms) {
-		 -moz-transform: $transforms;
-			 -o-transform: $transforms;
-			-ms-transform: $transforms;
+	-moz-transform: $transforms;
+	-o-transform: $transforms;
+	-ms-transform: $transforms;
 	-webkit-transform: $transforms;
-					transform: $transforms;
+	transform: $transforms;
 }
 
 @mixin translate ($x, $y) {
@@ -190,21 +202,21 @@ $legacy-support-for-ie6: false;
 }
 
 @mixin matrix ($a, $b, $c, $d, $e, $f) {
-				 -moz-transform: matrix($a, $b, $c, $d, #{$e}px, #{$f}px);
-					 -o-transform: matrix($a, $b, $c, $d, $e, $f);
-					-ms-transform: matrix($a, $b, $c, $d, $e, $f);
-			-webkit-transform: matrix($a, $b, $c, $d, $e, $f);
-							transform: matrix($a, $b, $c, $d, $e, $f);
+	-moz-transform: matrix($a, $b, $c, $d, #{$e}px, #{$f}px);
+	-o-transform: matrix($a, $b, $c, $d, $e, $f);
+	-ms-transform: matrix($a, $b, $c, $d, $e, $f);
+	-webkit-transform: matrix($a, $b, $c, $d, $e, $f);
+	transform: matrix($a, $b, $c, $d, $e, $f);
 }
 
 
 @mixin fontFace( $fontName, $path: "", $weight: normal, $style: none, $fileName: $fontName, $svg:0 ) {
 	@font-face {
 	  font-family: $fontName;
-	  				src: url("#{$path}#{$fileName}.eot");
-				  	src: url("#{$path}#{$fileName}.eot?iefix") format("eot"), 
-				  			 url("#{$path}#{$fileName}.woff") format("woff"),
-				  			 url("#{$path}#{$fileName}.ttf") format("truetype");
+	  			   src: url("#{$path}#{$fileName}.eot");
+				   src: url("#{$path}#{$fileName}.eot?iefix") format("eot"), 
+				        url("#{$path}#{$fileName}.woff") format("woff"),
+				  	    url("#{$path}#{$fileName}.ttf") format("truetype");
 	  			 /*
 	  			 @if $svg != 0 {
 	  			 	,url("#{$path}#{$fileName}.svg##{$fileName}") format("svg");
