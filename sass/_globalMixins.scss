@@ -211,18 +211,19 @@ $legacy-support-for-ie6: false;
 
 
 @mixin fontFace( $fontName, $path: "", $weight: normal, $style: none, $fileName: $fontName, $svg:0 ) {
+	$src: ( url("#{$path}#{$fileName}.eot?iefix") format("eot"), 
+		    url("#{$path}#{$fileName}.woff") format("woff"),
+		    url("#{$path}#{$fileName}.ttf") format("truetype") );
+
+	@if $svg != 0 {
+		$src: $src, url("#{$path}#{$fileName}.svg##{$fileName}") format("svg");
+	}
+
 	@font-face {
 	  font-family: $fontName;
 	  			   src: url("#{$path}#{$fileName}.eot");
-				   src: url("#{$path}#{$fileName}.eot?iefix") format("eot"), 
-				        url("#{$path}#{$fileName}.woff") format("woff"),
-				  	    url("#{$path}#{$fileName}.ttf") format("truetype");
-	  			 /*
-	  			 @if $svg != 0 {
-	  			 	,url("#{$path}#{$fileName}.svg##{$fileName}") format("svg");
-	  			 }else{
-	  			 	;
-	  			 }*/
+				   src: $src;
+
 	  font-weight: $weight;
 	  font-style: $style;
 	}
