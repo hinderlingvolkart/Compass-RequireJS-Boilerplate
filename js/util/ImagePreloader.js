@@ -59,7 +59,7 @@ define(["jquery"],function() {
         totalCallbacks--;
         callbackSingle.apply( $that );
 
-        if( (totalCallbacks-1) <= 0 ){
+        if( (totalCallbacks-1) === 0 ){
           callbackAll.apply( $images );
         }
       });
