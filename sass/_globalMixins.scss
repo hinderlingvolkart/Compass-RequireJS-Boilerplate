@@ -18,6 +18,8 @@ $legacy-support-for-ie6: false;
 	@return ( $px * 100 / $contextSize) * 1%;
 }
 
+/* simple grid function */
+
 
 @mixin antialiasing( $type:antialiased ) {
 	/* antialiased, none, subpixel-antialiased*/
@@ -167,3 +169,22 @@ $legacy-support-for-ie6: false;
 	}
 }
 
+/* col system */
+/* usage:
+ * cols:
+ * @include cols(12);
+ * tabulations:
+ * @include cols(12,tab,margin-left,70px);
+ */
+
+@function colPosition( $position:0,$colWidth:80px ){
+	@return $position * $colWidth;
+}
+
+@mixin cols( $maxCols:12,$class-slug:col,$attr:width,$colWidth:80px ){
+	@for $i from 0 through $maxCols {
+  		.#{$class-slug}-#{$i} {
+    		#{$attr}: px2em( colPosition($i,$colWidth) );
+    	}
+   	}
+}
