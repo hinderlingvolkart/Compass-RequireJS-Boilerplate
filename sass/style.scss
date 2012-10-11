@@ -13,9 +13,8 @@
 @import "constants.scss";
 @import "globalMixins.scss";
 
-/* html5boilerplate css*/
 @import "normalize.scss";
-@import "opinionated_defaults.scss";
+ 
 
 /* ==|== primary styles =====================================================
 	 Author: Hinderling & Volkart Frontend 
@@ -37,12 +36,22 @@
 
 #main {
 	@include borderbox;
+	@include transform( scale(3) );
 }
 
+
+/* ==|== media queries ======================================================
+	 EXAMPLE Media Query for Responsive Design.
+	 This example overrides the primary ('mobile first') styles
+	 Modify as content requires.
+	 ========================================================================== */
+
+//@media only screen and (min-width: 35em) {
+	/* Style adjustments for viewports that meet the condition */
+//}
+
+
 @import "helpers.scss";
-
-@import "responsive.scss";
-
 @import "print.scss";
 
 

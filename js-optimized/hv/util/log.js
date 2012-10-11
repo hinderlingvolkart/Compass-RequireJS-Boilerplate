@@ -1,0 +1,1 @@
+define([],function(){var e=function(){e.history=e.history||[],e.history.push(arguments);if(this.console){var n=arguments,r;n.callee=n.callee.caller,r=[].slice.call(n),typeof console.log=="object"?e.apply.call(console.log,console,r):console.log.apply(console,r)}};return e})
