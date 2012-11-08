@@ -1,1 +1,0 @@
-require([],function(){return!0}),function(e){function t(){}for(var n="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),r;!!(r=n.pop());)e[r]=e[r]||t}(function(){try{return console.log(),window.console}catch(e){return window.console={}}}())

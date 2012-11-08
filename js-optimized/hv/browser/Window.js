@@ -1,1 +1,0 @@
-define(["jquery"],function(e){function o(){n=t.width(),r=t.height()}function u(){i=t.scrollTop(),s=t.scrollLeft()}var t=e(window),n,r,i,s;t.resize(o),t.scroll(u),o(),u();var a={width:function(){return n},height:function(){return r},scrollTop:function(){return i},scrollLeft:function(){return s},resize:function(){t.resize.apply(t,arguments)}};return a})
