@@ -40,29 +40,34 @@ define(["jquery"],function() {
   };
 
   ImagePreloader = function( images,callbackAll,callbackSingle ){
-    var totalCallbacks, ieCachehack, $images;
+    var totalCallbacks, $images, imageLoaded;
 
     $images = images instanceof jQuery ? images : imageToJquery( images );
 
     totalCallbacks = $images.length;
     callbackSingle = callbackSingle || function(){};
     callbackAll = callbackAll || function(){};
-    ieCachehack = function(){
-      return "?ie=" + ($.browser.msie ? Math.random()*999 : "");
-    };
 
     /* todo: use image.complete for IE */
-
-    return $images.each(function(){
-      var $that = $(this);
-      $("<img />").attr("src", $that.attr("src") + ieCachehack()).load(function(){
-        totalCallbacks--;
+    imageLoaded = function( $that ){
+      totalCallbacks--;
         callbackSingle.apply( $that );
 
         if( (totalCallbacks-1) === 0 ){
           callbackAll.apply( $images );
         }
-      });
+    };
+
+    return $images.each(function(){
+      var $that = $(this);
+
+      if( this.complete ) {
+        imageLoaded( $that );
+      }else{
+        $("<img />").attr("src", $that.attr("src") ).load(function(){
+          imageLoaded( $that );
+        });
+      }
 
     });
 
