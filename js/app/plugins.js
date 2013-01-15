@@ -1,6 +1,6 @@
 // require all jquery plugins here: (between the brackets)
 
-require([], function(){
+define([], function(){
 	return true;
 });
 
