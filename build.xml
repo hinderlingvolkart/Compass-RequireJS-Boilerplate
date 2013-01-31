@@ -1,7 +1,16 @@
 <?xml version="1.0"?>
+<!--
+	It is recommanded to put this boilerplate directory (the dev directory)
+	into trunk/source - you'll find your build directory in trunk/build
+-->
 <project name="requirejs" basedir="./" default="compile">
+	<property name="build" location="../build"/>
 
 	<target name="compile">
+		<!-- Create a build directory if not there -->
+		<mkdir dir="${build}"/>
+		
+		<!-- Copy JS to js-temp and remove all SVN stuff -->
 		<copy todir="js-temp">
 			<fileset dir="js"/>
 		</copy>
@@ -12,11 +21,81 @@
 			<arg line="-exec rm"/>
 			<arg line="-rf {} ;"/>
 		</exec>
+		
+		<!-- Run r.js on the js-temp: js-optimized will be created -->
 		<exec executable="node" dir="${basedir}">
 			<arg line="'build/r.js'" />
 			<arg line="-o build/app.build.js" />
 		</exec>
+		
+		<!-- Get rid of js-temp -->
 		<delete dir="js-temp"/>
+		
+		<!-- Sync js-optimzed to build/js -->
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="js-optimized/"/>
+		  <arg value="${build}/js"/>
+		</exec>
+
+		<!-- Sync css to build -->
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="css"/>
+		  <arg value="${build}"/>
+		</exec>
+
+		<!-- Sync html to build -->
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="html"/>
+		  <arg value="${build}"/>
+		</exec>
+
+		<!-- Sync meta to build -->
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="meta"/>
+		  <arg value="${build}"/>
+		</exec>
+
+		<!-- Sync img to build -->
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="img"/>
+		  <arg value="${build}"/>
+		</exec>
+
+		<!-- Sync demo to build -->
+		<exec executable="rsync" dir="${basedir}" failonerror="false">
+		  <arg value="-avC"/>
+		  <arg value="--delete"/>
+		  <arg value="demo"/>
+		  <arg value="${build}"/>
+		</exec>
+
+		<!-- That's how you would sync a single html file (and rename it) -->
+		<!--
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="app.html"/>
+		  <arg value="${build}/index.html"/>
+		</exec>
+		-->
+
+		<exec executable="rsync" dir="${basedir}" failonerror="true">
+		  <arg value="-avC"/>
+		  <arg value="meta/favicon.ico"/>
+		  <arg value="${build}/favicon.ico"/>
+		</exec>
+		
+		<!-- Clean up -->
+		<delete dir="js-optimized"/>
 	</target>
 	
 </project>
